@@ -6,6 +6,70 @@ let score=JSON.parse(localStorage.getItem('score')) || {
 
 updateScoreElement();
 
+
+let isAutoPlay = false;
+let intervalId;
+
+function autoPlay(){
+    if(!isAutoPlay){
+        intervalId =setInterval(() => {
+            const playerMove=pickComputerMove();
+            playGame(playerMove);
+        },1000)
+
+        isAutoPlay = true;
+    }else{
+        clearInterval(intervalId);
+        isAutoPlay = false;
+    }
+    
+}
+
+
+
+document.querySelector('.js-rock-button')
+.addEventListener('click',() =>{
+    playGame('rock');
+})
+
+document.querySelector('.js-paper-button')
+.addEventListener('click',() =>{
+    playGame('paper');
+})
+
+document.querySelector('.js-scissors-button')
+.addEventListener('click',() =>{
+    playGame('scissors');
+})
+
+
+
+document.querySelector('.reset-score-button')
+.addEventListener('click',() => {
+    score.wins=0;score.losses=0;score.ties=0;
+    localStorage.removeItem('score');
+    updateScoreElement();
+})
+
+document.querySelector('.auto-play-button')
+.addEventListener('click',() => {
+    autoPlay()
+});
+
+
+
+document.body.addEventListener('keydown',(event) => {
+    if(event.key === 'r'){
+        playGame('rock');
+    }else if(event.key === 'p'){
+        playGame('paper');
+    }else if(event.key === 's'){
+        playGame('scissors');
+    }
+});
+
+
+
 function playGame(playerMove){
     computerMove = pickComputerMove();
     
