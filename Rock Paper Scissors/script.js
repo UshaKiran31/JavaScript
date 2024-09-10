@@ -27,34 +27,12 @@ function autoPlay(){
 
 
 
-document.querySelector('.js-rock-button')
-.addEventListener('click',() =>{
-    playGame('rock');
-})
-
-document.querySelector('.js-paper-button')
-.addEventListener('click',() =>{
-    playGame('paper');
-})
-
-document.querySelector('.js-scissors-button')
-.addEventListener('click',() =>{
-    playGame('scissors');
-})
-
-
-
-document.querySelector('.reset-score-button')
-.addEventListener('click',() => {
-    score.wins=0;score.losses=0;score.ties=0;
-    localStorage.removeItem('score');
-    updateScoreElement();
-})
-
-document.querySelector('.auto-play-button')
-.addEventListener('click',() => {
-    autoPlay()
-});
+// Simplified event listeners
+document.querySelector('.js-rock-button').addEventListener('click', () => playGame('rock'));
+document.querySelector('.js-paper-button').addEventListener('click', () => playGame('paper'));
+document.querySelector('.js-scissors-button').addEventListener('click', () => playGame('scissors'));
+document.querySelector('.reset-score-button').addEventListener('click', resetScore);
+document.querySelector('.auto-play-button').addEventListener('click', autoPlay);
 
 
 
