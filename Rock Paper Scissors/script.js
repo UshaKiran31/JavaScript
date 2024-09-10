@@ -27,34 +27,12 @@ function autoPlay(){
 
 
 
-document.querySelector('.js-rock-button')
-.addEventListener('click',() =>{
-    playGame('rock');
-})
-
-document.querySelector('.js-paper-button')
-.addEventListener('click',() =>{
-    playGame('paper');
-})
-
-document.querySelector('.js-scissors-button')
-.addEventListener('click',() =>{
-    playGame('scissors');
-})
-
-
-
-document.querySelector('.reset-score-button')
-.addEventListener('click',() => {
-    score.wins=0;score.losses=0;score.ties=0;
-    localStorage.removeItem('score');
-    updateScoreElement();
-})
-
-document.querySelector('.auto-play-button')
-.addEventListener('click',() => {
-    autoPlay()
-});
+// Simplified event listeners
+document.querySelector('.js-rock-button').addEventListener('click', () => playGame('rock'));
+document.querySelector('.js-paper-button').addEventListener('click', () => playGame('paper'));
+document.querySelector('.js-scissors-button').addEventListener('click', () => playGame('scissors'));
+document.querySelector('.reset-score-button').addEventListener('click', resetScore);
+document.querySelector('.auto-play-button').addEventListener('click', autoPlay);
 
 
 
@@ -125,18 +103,9 @@ function updateScoreElement(){
     .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
 
-function pickComputerMove(){
-    const randomNumber = Math.random();
+//Improved the pickComputerMove function by using an array of moves and Math.floor(Math.random() * 3).
 
-    let computerMove = '';
-    if (randomNumber >= 0 && randomNumber < 1/3) {
-        computerMove = 'rock';
-    }  else if(randomNumber >= 1/3 && randomNumber < 2/3) {
-        computerMove = 'paper';
-    }else if(randomNumber >= 2/3 && randomNumber < 1) {
-        computerMove = 'scissors';
-    }
-
-    return computerMove;
-
+function pickComputerMove() {
+    const moves = ['rock', 'paper', 'scissors'];
+    return moves[Math.floor(Math.random() * 3)];
 }
